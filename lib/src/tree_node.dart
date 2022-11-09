@@ -160,13 +160,26 @@ class _TreeNodeState extends State<TreeNode> with SingleTickerProviderStateMixin
                     child: CircularProgressIndicator(strokeWidth: 1.0),
                   ),
                 Expanded(
-                  child: Padding(
+                  child: !widget.contentTappable ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6.0),
                     child: Text(
                       widget.data.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
+                  ) :
+                  GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                      child: Text(
+                        widget.data.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    onTap: () {
+                      widget.onTap(widget.data);
+                      },
                   ),
                 ),
                 if (widget.showActions)
